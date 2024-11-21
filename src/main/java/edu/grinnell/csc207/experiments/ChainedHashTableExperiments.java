@@ -37,6 +37,7 @@ public class ChainedHashTableExperiments {
     // Create a new hash table
     ChainedHashTable<String, String> htab =
         new ChainedHashTable<String, String>(rept);
+    HashTableExperiments.repeatedSetExpt(pen, htab);
 
     // Most of the time, we don't care about the basic calls
     htab.reportBasicCalls(false);

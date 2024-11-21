@@ -9,8 +9,8 @@ import java.util.function.BiConsumer;
 /**
  * A simple implementation of chained hash tables.
  *
- * @author Your Name Here
- * @author Your Name Here
+ * @author Sara Jaljaa
+ * @author Sheilla Muligande
  * @author Samuel A. Rebelsky
  *
  * @param <K>
@@ -249,7 +249,7 @@ public class ChainedHashTable<K, V> implements HashTable<K, V> {
       this.buckets[index] = alist;
     } // if
     alist.add(new Pair<K, V>(key, value));
-    ++this.size;
+    //++this.size;
 
     // Report activity, if appropriate
     if (REPORT_BASIC_CALLS && (reporter != null)) {

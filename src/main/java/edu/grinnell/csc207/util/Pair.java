@@ -40,8 +40,8 @@ public class Pair<K, V> {
    *   The value.
    */
   public Pair(K k, V v) {
-    this.key = key;
-    this.value = value;
+    this.key = k;
+    this.value = v;
   } // Pair(K, V)
 
   // +------------------+--------------------------------------------
