@@ -75,10 +75,6 @@ public class HashTableExperiments {
         htab.reportBasicCalls(false);
         checkGet(pen, htab, "bravo");
         pen.println();
-
-
-
-
   } // repeatedSetExpt(PrintWriter, HashTable)
 
   /**

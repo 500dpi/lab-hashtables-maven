@@ -8,8 +8,8 @@ import java.util.function.BiConsumer;
 /**
  * A simple implementation of probed hash tables.
  *
- * @author Your Name Here
- * @author Your Name Here
+ * @author Sheilla Muligande
+ * @author Sara Jaljaa
  * @author Samuel A. Rebelsky
  *
  * @param <K>
@@ -186,7 +186,7 @@ public class ProbedHashTable<K, V> implements HashTable<K, V> {
     int index = find(key);
     @SuppressWarnings("unchecked")
     Pair<K, V> pair = (Pair<K, V>) pairs[index];
-    if (pair == null) {
+    if (pair == null || !((Pair) this.pairs[index]).key().equals(key)) {
       if (REPORT_BASIC_CALLS && (reporter != null)) {
         reporter.report("get(" + key + ") failed");
       } // if reporter != null
@@ -382,7 +382,28 @@ public class ProbedHashTable<K, V> implements HashTable<K, V> {
    * @return the aforementioned index.
    */
   int find(K key) {
-    return Math.abs(key.hashCode()) % this.pairs.length;
+    K search;
+    for(int i = Math.abs(key.hashCode()) % this.pairs.length; i < this.pairs.length;i += PROBE_OFFSET){
+      search = (K) ((Pair) pairs[i]).key();
+      if ((search != null)) {
+        if (((Pair) pairs[i]).key().equals(key)) {
+          return i;
+        }
+      }  
+     }
+
+    if (this.pairs.length <= size){
+      for (int i = Math.abs(key.hashCode()) % this.pairs.length; i < this.pairs.length;i += PROBE_OFFSET){
+        if (pairs[i] == null){
+          return i;
+        }
+      }
+    } 
+
+  
+    return 0;
+  
+    
   } // find(K)
 
 } // class ProbedHashTable<K, V>
