@@ -17,6 +17,6 @@ A lab on hash tables, structured for Maven.
 
 **Source**
 
-[The original code may be found at: Grinnell-CSC207/lab-hashtables-maven](https://github.com/Grinnell-CSC207/lab-hashtables-maven)
+The original code may be found at: [Grinnell-CSC207/lab-hashtables-maven](https://github.com/Grinnell-CSC207/lab-hashtables-maven)
 
-[This code may be found at: 500dpi/lab-hashtables-maven](https://github.com/500dpi/lab-hashtables-maven.git)
+This code may be found at: [500dpi/lab-hashtables-maven](https://github.com/500dpi/lab-hashtables-maven.git)
