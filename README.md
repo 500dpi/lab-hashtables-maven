@@ -8,11 +8,14 @@ A lab on hash tables, structured for Maven.
 * Sheilla Muligande
 * Samuel A. Rebelsky (starter code)
 
-**Citations**
+**Progress**
 
-**Additional Notes**
+- Probed Hash Tables: Exercise 5
+- Chained Hash Tables: --
 
 ---
 
-This code may be found at <https://github.com/500dpi/lab-hashtables-maven.git>.
-The original code may be found at <https://github.com/Grinnell-CSC207/lab-hashtables-maven>.
+**Source**
+
+[The original code may be found at: Grinnell-CSC207/lab-hashtables-maven](https://github.com/Grinnell-CSC207/lab-hashtables-maven)
+[This code may be found at: 500dpi/lab-hashtables-maven](https://github.com/500dpi/lab-hashtables-maven.git)

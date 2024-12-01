@@ -8,8 +8,8 @@ import java.io.PrintWriter;
 /**
  * A simple experiment with probed hash tables.
  *
- * @author Your Name Here
- * @author Your Name Here
+ * @author Sheilla Muligande
+ * @author Sara Jaljaa
  * @author Samuel A. Rebelsky
  */
 public class ProbedHashTableExperiments {
@@ -42,9 +42,9 @@ public class ProbedHashTableExperiments {
     htab.reportBasicCalls(false);
 
     // Conduct some of the experiments
-    //HashTableExperiments.matchingKeysExpt(pen, htab);
-    HashTableExperiments.repeatedSetExpt(pen, htab);
-    HashTableExperiments.matchingSetExpt(pen, htab);
+    // HashTableExperiments.matchingKeysExpt(pen, htab);
+    // HashTableExperiments.repeatedSetExpt(pen, htab);
+    // HashTableExperiments.matchingSetExpt(pen, htab);
     HashTableExperiments.multipleSetExpt(pen, htab);
     // HashTableExperiments.removeExpt(pen, htab);
   } // main(String[])

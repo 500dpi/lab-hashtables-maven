@@ -47,13 +47,13 @@ public class ProbedHashTable<K, V> implements HashTable<K, V> {
    *
    * Bugs to squash.
    *
-   * [ ] Doesn't check for repeated keys in set.
+   * [X] Checks for repeated keys in set.
    *
-   * [ ] Doesn't check for matching key in get.
+   * [X] Checks for matching key in get.
    *
-   * [ ] Doesn't handle collisions.
+   * [X] Handles collisions.
    *
-   * [ ] The `expand` method is not completely implemented.
+   * [X] The `expand` method is implemented.
    *
    * [ ] The `remove` method is not implemented.
    *
@@ -186,13 +186,13 @@ public class ProbedHashTable<K, V> implements HashTable<K, V> {
     int index = find(key);
     @SuppressWarnings("unchecked")
     Pair<K, V> pair = (Pair<K, V>) pairs[index];
-    if (pair == null || !((Pair) this.pairs[index]).key().equals(key)) {
+    if (pair == null) {
       if (REPORT_BASIC_CALLS && (reporter != null)) {
         reporter.report("get(" + key + ") failed");
       } // if reporter != null
       throw new IndexOutOfBoundsException("Invalid key: " + key);
     } else {
-      if (REPORT_BASIC_CALLS && (reporter != null)) {
+      if (pair.key().equals(key) && REPORT_BASIC_CALLS && (reporter != null)) {
         reporter.report("get(" + key + ") => " + pair.value());
       } // if reporter != null
       return pair.value();
@@ -243,8 +243,18 @@ public class ProbedHashTable<K, V> implements HashTable<K, V> {
     } // if there are too many entries
     // Find out where the key belongs and put the pair there.
     int index = find(key);
-    if (this.pairs[index] != null) {
+    /* If the keys are the same, check if the value to be is set is the
+    same as the pre-existing value. */
+    if (this.pairs[index] != null && ((Pair) this.pairs[index]).key().equals(key)) {
       result = ((Pair<K, V>) this.pairs[index]).value();
+      /* If the value to be set is different, then set the value at the key and return
+      the previous value. Otherwise, return null since the value remains unchanged. */
+      if (result != value) {
+        this.pairs[index] = new Pair<K, V>(key, value);
+        return result;
+      } else {
+        return null;
+      } // elif
     } // if
     this.pairs[index] = new Pair<K, V>(key, value);
     // Report activity, if appropriate
@@ -360,16 +370,23 @@ public class ProbedHashTable<K, V> implements HashTable<K, V> {
    */
   void expand() {
     // Figure out the size of the new table.
-    int newSize = 2 * this.pairs.length + rand.nextInt(10);
+    int newSize = 2 * this.pairs.length + rand.nextInt(20);
+    /* Check if the size is a multiple of the probe offset. */
+    if (newSize % PROBE_OFFSET == 0) {
+      newSize++;
+    } // if
     if (REPORT_BASIC_CALLS && (reporter != null)) {
       reporter.report("Expanding to " + newSize + " elements.");
     } // if reporter != null
     // Create a new table of that size.
     Object[] newPairs = new Object[newSize];
-    // Move all pairs from the old table to their appropriate
-    // location in the new table.
-    // STUB
-    // And update our pairs
+    /* Copy over the values from the original pairs, skipping the null elements. */
+    for (int i = 0; i < this.pairs.length; i++) {
+      if (this.pairs[i] != null) {
+        newPairs[i] = this.pairs[i];
+      } // if
+    } // for
+    this.pairs = newPairs;
   } // expand()
 
   /**
@@ -381,30 +398,19 @@ public class ProbedHashTable<K, V> implements HashTable<K, V> {
    *
    * @return the aforementioned index.
    */
+  @SuppressWarnings({"rawtypes"})
   int find(K key) {
-    K search;
-    for(int i = Math.abs(key.hashCode()) % this.pairs.length; i < this.pairs.length;i += PROBE_OFFSET){
-      search = (K) ((Pair) pairs[i]).key();
-      if ((search != null)) {
-        if (((Pair) pairs[i]).key().equals(key)) {
-          return i;
-        }
-      }  
-     }
-
-    if (this.pairs.length <= size){
-      for (int i = Math.abs(key.hashCode()) % this.pairs.length; i < this.pairs.length;i += PROBE_OFFSET){
-        if (pairs[i] == null){
-          return i;
-        }
-      }
-    } 
-
-  
-    return 0;
-  
-    
+    /* The starting index. */
+    int index = Math.abs(key.hashCode()) % this.pairs.length;
+    /* Checks first that the pair is not null, then if the pair
+    matches the target key. */
+    while (this.pairs[index] != null
+        && !((Pair) this.pairs[index]).key().equals(key)) {
+      index = (index + PROBE_OFFSET) % this.pairs.length;
+    } // while
+    /* If pair is found, it will be returned; otherwise, the last
+    index must be a null value to exit the loop. */
+    return index;
   } // find(K)
-
 } // class ProbedHashTable<K, V>
 

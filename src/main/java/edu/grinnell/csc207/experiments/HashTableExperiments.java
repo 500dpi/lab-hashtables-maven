@@ -7,8 +7,8 @@ import java.io.PrintWriter;
 /**
  * A simple set of experiments using our new hash tables.
  *
- * @author Your Name Here
- * @author Your Name Here
+ * @author Sheilla Muligande
+ * @author Sara Jaljaa
  * @author Samuel A. Rebelsky
  */
 public class HashTableExperiments {
