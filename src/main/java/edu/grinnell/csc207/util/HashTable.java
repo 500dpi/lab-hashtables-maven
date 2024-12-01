@@ -12,7 +12,7 @@ import java.io.PrintWriter;
  * @param <V>
  *   The type for values.
  */
-public interface HashTable<K, V> extends SimpleMap<K, V>, Iterable<Pair<K, V>> {
+public interface HashTable<K, V> extends SimpleMap<K, V> {
 
   /**
    * Clear the whole table.

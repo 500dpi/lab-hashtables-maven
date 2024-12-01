@@ -77,7 +77,7 @@ public class ProbedHashTable<K, V> implements HashTable<K, V> {
    * The offset to use in linear probes. (We choose a prime because that helps
    * ensure that we cover all of the spaces.)
    */
-  static final double PROBE_OFFSET = 17;
+  static final int PROBE_OFFSET = 17;
 
   // +--------+----------------------------------------------------------
   // | Fields |

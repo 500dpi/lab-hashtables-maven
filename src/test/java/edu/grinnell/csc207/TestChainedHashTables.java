@@ -1,3 +1,7 @@
+package edu.grinnell.csc207;
+
+import edu.grinnell.csc207.util.ChainedHashTable;
+
 import org.junit.jupiter.api.BeforeEach;
 
 /**
